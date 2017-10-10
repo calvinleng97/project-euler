@@ -1,4 +1,4 @@
-#include "projectEulerv2.h"
+#include "projectEuler.h"
 #include <iomanip>
 #include <iostream>
 
