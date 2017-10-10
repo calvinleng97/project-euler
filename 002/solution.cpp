@@ -2,6 +2,8 @@
 #include <iomanip>
 #include <cmath>
 
+static const int N = 4000000;
+
 using namespace std;
 
 int main()
@@ -17,7 +19,7 @@ int main()
     int temp = x2;
     x2 = x1 + x2;
     x1 = temp;
-  } while (x2 <= 4000000);
+  } while (x2 <= N);
 
   cout << result << endl;
 
