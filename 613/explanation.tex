@@ -1,0 +1,54 @@
+\documentclass[12pt]{article}
+ \usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb,amsfonts,bbm, physics}
+\usepackage{graphicx}
+\usepackage{systeme}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\lm}{\lambda}
+\newcommand{\I}{\mathbbm{1}}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+\begin{document}
+ 
+\noindent
+This problem was done by hand. We represent the triangle on the plane where the origin is at the right angle of the triangle and extends 40 in the $X$ direction and 30 in the $Y$ direction. We attack the problem by first uniformly choosing a random point $P$ on the plane. By symmetry that will be seen later in the problem, we can instead uniformly choose a point on the 30 by 40 rectangle. Therefore, if $X$ is the $X$-component of $P$ and $Y$ is the $Y$-component, we have
+\begin{align*}
+    &X \sim \text{Uniform}(0, 40),\\
+    &Y \sim \text{Uniform}(0, 30).
+\end{align*}
+
+\noindent
+Denote the vectors extending from the random point to the non-origin corners of the triangle as $\textbf{u}$ and $\textbf{v}$. We have
+\begin{align*}
+    \textbf{u} = (-X, 30 - Y),\\
+    \textbf{v} = (40 - X, -Y).
+\end{align*}
+
+\noindent
+We can compute the angle $\alpha$ that the three points form at point $P$ from the dot product, arriving at
+\begin{align*}
+    \alpha &= \arccos\left(\frac{\textbf{u} \cdot \textbf{v}}{|\textbf{u}| |\textbf{v}|}\right)\\
+    &= \arccos\left(\frac{X^2 - 40X + Y^2 - 30Y}{\sqrt{(X^2 + Y^2 - 60Y + 900)(X^2 - 800X + 1600 + Y^2)}}\right)\\
+    &:= f(X, Y).
+\end{align*}
+
+\noindent
+Now that we have $\alpha = f(X, Y)$, we see that 
+\begin{align*}
+    \mathbb{P}(\text{ant leaves longest side}) &= \frac{\mathbb{E}[\alpha]}{2\pi}\\
+    &= \int_0^{30}\int_0^{40} \frac{f(X, Y)}{2400\pi} \text{dX}\text{dY},
+\end{align*}
+
+\noindent
+which we compute through online definite integral calculators to arrive at
+
+\begin{align*}
+    \mathbb{P}(\text{ant leaves longest side}) = 0.3916721504...
+\end{align*}
+\end{document}
