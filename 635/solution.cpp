@@ -14,6 +14,7 @@ static const int mod = 1000000009;
 using namespace std;
 
 // for division over F_mod
+// Credit to: https://www.geeksforgeeks.org/multiplicative-inverse-under-modulo-m/
 int modInverse(int a, int m)
 {
     int m0 = m;
