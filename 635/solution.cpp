@@ -51,12 +51,17 @@ int main()
     vector<unsigned long int>::iterator next = itr;
     next++;
 
+    // Value of \binom(2p, p)
     unsigned long long int fact2 = choose(4, 2);
+    
+    // Value of \binom(3p, p)
     unsigned long long int fact3 = choose(6, 2);
     unsigned long long int runningSum = 0;
 
     for (;itr != primes.end(); itr++, next++) {
         unsigned long int p = *itr;
+        
+        // refer to explanation.tex
         runningSum += ((fact2 - 2) % mod) * modInverse(p, mod) + 2;
         runningSum %= mod;
         runningSum += ((fact3 - 3) % mod) * modInverse(p, mod) + 3;
