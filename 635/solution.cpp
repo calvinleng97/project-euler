@@ -3,7 +3,6 @@
  *
  */
 #include "../functions/projectEuler.h"
-#include "../functions/BigInteger.h"
 #include <vector>
 #include <iomanip>
 #include <iostream>
@@ -14,6 +13,7 @@ static const int mod = 1000000009;
 
 using namespace std;
 
+// for division over F_mod
 int modInverse(int a, int m)
 {
     int m0 = m;
@@ -61,6 +61,7 @@ int main()
         runningSum += ((fact3 - 3) % mod) * modInverse(p, mod) + 3;
         runningSum %= mod;
 
+        // updates the factorial dynamically rather than recomputing
         if (*next) {
             unsigned long int nextP = *next;
 
@@ -94,7 +95,7 @@ int main()
         }
     }
    
-    runningSum -= 5;
+    runningSum -= 5; // off-by-x error for case of p = 2
     t = clock() - t;
     cout << "Answer: " << runningSum << endl;
     cout << "Took " << (float) t / CLOCKS_PER_SEC << "s to run program!";
