@@ -1,0 +1,65 @@
+\documentclass[12pt]{article}
+ \usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb,amsfonts,bbm, physics}
+\usepackage{graphicx}
+\usepackage{systeme}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\lm}{\lambda}
+\newcommand{\I}{\mathbbm{1}}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+\begin{document}
+ 
+\noindent
+Let $m = 1000000009$. he first thing I did to arrive at the solution was find a closed form solution for $S_2(p)$ and $S_3(p)$. I do not have a proof of the formulas, but I give the intuition that led me to the formulas.
+
+First, I viewed the set $B$ as $\mathbb{F}_p$ with $q = 2, 3$ copies of each element. Then, we note that
+\begin{align*}
+    \sum_{x \in \mathbb{F}_p} x = 0,
+\end{align*}
+so we automatically get $q$ subsets of $B$ that sum to 0. From these two subsets, we can construct every other subset that sums to 0. To do so, choose an arbitrary $v \in \mathbb{F}_p^p$ and consider $w := \mathbb{F}_p$ as a vector in $\mathbb{F}_p^p$, i.e.
+\begin{align*}
+    w = (1, 2, \dots, p-1) \in \mathbb{F}_p^p.
+\end{align*}
+Now denote
+\begin{align*}
+    &a_0 = w\\
+    &a_{i+1} = a_0 + v
+\end{align*}
+where addition is the usual component-wise addition. Now note that the sum of the components of $a_i$ will cycle through every element of $\mathbb{F}_p$ as $i = 0, 1, \dots, p - 1$ since the field $\mathbb{F}_p$ has prime characteristic. 
+
+Now this is the part where my intuition made a leap of faith: I had a feeling that choosing different vectors for $v$ will let us form a partition of the subsets of $B$ with each partition containing $lp$ subsets (for some integer $l$) that each sum to $l$-distinct elements of $\mathbb{F}_p$. I dunno, it felt like the symmetry would let us do that. Well, it proved to work out because I got the correct answer :).
+
+Thus, we have
+\begin{align*}
+    S_q(p) = \frac{1}{p} \left(\binom{qp}{p} - q\right) + q.
+\end{align*}
+
+Now that the math part is done, the last thing I had to do was save up on computation time. The first thing to tackle was to dynamically compute the binomial coefficient, as we have to compute 
+\begin{align*}
+    \binom{qp}{q} \text{ for } p \leq 10000000, q = 2, 3.
+\end{align*}
+To do that, if we denote $p(k)$ as the $k$-th prime, we want to express
+\begin{align*}
+    \binom{q\cdotp(k+1)}{p(k+1)}
+\end{align*}
+in terms of
+\begin{align*}
+    \binom{q\cdot p(k)}{p(k)}
+\end{align*}
+and update it for each iteration of $p \leq 100000000$, which was more annoying than I thought it'd be. This is left as an exercise to the reader.
+
+Lastly, in order to implement division in a finite field, I just took a piece of code found on
+\begin{center}
+    \url{https://www.geeksforgeeks.org/multiplicative-inverse-under-modulo-m/}
+\end{center}
+that implemented finding the inverse over a finite field for us. 
+
+Lastly, for the primes, I sieved with the Sieve of Eratosthenes. 
+\end{document}
