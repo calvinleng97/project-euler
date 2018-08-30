@@ -1,10 +1,5 @@
 /*
- * Project Euler 609
- * Time Complexity: O(N^(3/2)) 
- * Does not work for small values of N. Must change the log(N) in code to
- * a constant around 20 for it to work for small values, as log(N) is not a
- * good approximate for pi-sequence length for small N. A very naive approach,
- * can most likely be improved to linear post-prime-sieving.
+ * Project Euler 635
  *
  */
 #include "../functions/projectEuler.h"
